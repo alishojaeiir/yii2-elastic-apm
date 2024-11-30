@@ -1,8 +1,8 @@
 {
-    "name": "ivoglent/yii2-elastic-apm",
+    "name": "alishojaeiir/yii2-elastic-apm",
     "description": "Elastic Agent for Yii2 Framework",
     "type": "module",
-    "version": "1.0.8",
+    "version": "1.0.0",
     "require": {
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.14",
@@ -28,8 +28,8 @@
     },
     "authors": [
         {
-            "name": "Ivoglent Nguyen",
-            "email": "ivoglent@gmail.com"
+            "name": "Ali Shojaei",
+            "email": "alishojaei34@gmail.com"
         }
     ],
     "prefer-stable": true
