@@ -3,9 +3,9 @@
 namespace ivoglent\yii2\apm;
 
 
-use Elastic\Apm\PhpAgent\Config;
 use Elastic\Apm\PhpAgent\Model\Framework;
 use Exception;
+use GuzzleHttp\Client;
 use ivoglent\yii2\apm\components\ConsoleErrorHandler;
 use ivoglent\yii2\apm\components\WebErrorHandler;
 use ivoglent\yii2\apm\listeners\ConsoleListener;
@@ -52,6 +52,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
             $config->setFramework($fromework);
             $config->setEnvironment(YII_ENV);
 
+            if (isset($this->configs['client_setting'])) {
+                $client = new Client($this->configs['client_setting']);
+                $config->setClient($client);
+            }
+
             Yii::info('APM module init', 'apm');
 
             try {
@@ -83,7 +88,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
     /**
      * @return false|int
      */
-    private function isAssetRequest() {
+    private function isAssetRequest()
+    {
         if (isset($_SERVER['REQUEST_URI'])) {
             $url = $_SERVER['REQUEST_URI'];
             return preg_match('/\.(js|css|png|jpeg|jpg|map|mp4|avi|mp3|mov)$/i', $url);
@@ -98,7 +104,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         return $this->agent;
     }
-
 
 
     /**

@@ -42,14 +42,20 @@ class RequestListener extends Listener
      */
     public function afterRequest(Event $event) {
         Yii::info('Request stop', 'apm');
-        /** @var Application $sender */
-        $sender = $event->sender;
-        if (!Yii::$app->request->isOptions && $this->agent->transactionStarted) {
-            $result = $this->convertStatusCode(Yii::$app->response->getStatusCode());
-            //$this->agent->getTransaction()->setResult($result);
-            //$this->agent->getTransaction()->stop($result);
-            $this->agent->stopTransaction($result);
+        try {
+            /** @var Application $sender */
+            $sender = $event->sender;
+            if (!Yii::$app->request->isOptions && $this->agent->transactionStarted) {
+                $result = $this->convertStatusCode(Yii::$app->response->getStatusCode());
+                //$this->agent->getTransaction()->setResult($result);
+                //$this->agent->getTransaction()->stop($result);
+                $this->agent->stopTransaction($result);
+                return true;
+            }
+        } catch (Exception $e) {
+            Yii::error($e);
         }
+        return false;
     }
 
     /**

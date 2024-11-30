@@ -14,6 +14,9 @@ composer require --prefer-dist --profile -vvv ivoglent/yii2-elastic-apm
             'serverUrl' => 'localhost:8200', //Host and port of APM server 
             'name' => 'Service name', //Service name 
             'token' => APM_TOKEN, //Token
+            'client_setting' => [
+                "timeout" => 2 //timeout in second
+            ]
         ],
         'skipExceptions' => [
             //List of exceptions which you want to ignore
