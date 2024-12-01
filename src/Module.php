@@ -50,7 +50,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'version' => Yii::getVersion()
             ]);
             $config->setFramework($fromework);
-            $config->setEnvironment(YII_ENV);
+            if(isset($agentConfig['environment'])){
+                $config->setEnvironment($agentConfig['environment']);
+            } else {
+                $config->setEnvironment(YII_ENV);
+            }
 
             if (isset($this->configs['client_setting'])) {
                 $client = new Client($this->configs['client_setting']);
