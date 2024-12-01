@@ -4,7 +4,7 @@ Elastic Agent for Yii2 Framework
 ## Installation
 Let install this module via composer
 
-composer require --prefer-dist --profile -vvv ivoglent/yii2-elastic-apm
+composer require --prefer-dist --profile -vvv alishojaeiir/yii2-elastic-apm
 ## Configuration
 ```
 'apm' => [
