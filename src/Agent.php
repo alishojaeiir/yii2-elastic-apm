@@ -4,6 +4,7 @@
 namespace ivoglent\yii2\apm;
 
 use Elastic\Apm\PhpAgent\Agent as BaseAgent;
+use Elastic\Apm\PhpAgent\Exception\RuntimeException;
 use Elastic\Apm\PhpAgent\Model\Context\SpanContext;
 use Elastic\Apm\PhpAgent\Model\Span;
 use Exception;
@@ -51,6 +52,7 @@ class Agent extends BaseAgent
             return;
         }
         try {
+            $this->getTransaction();
             return parent::notifyException($throwable);
         } catch (\Exception $e) {
             Yii::error($e->getMessage());
